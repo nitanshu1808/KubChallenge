@@ -9,31 +9,30 @@ RSpec.describe UtilityHelper do
   context '#transform_str_into_arr_of_int' do
     subject { instance.transform_str_into_arr_of_int(val) }
 
+    shared_examples 'transform string into array of integers' do |param_one, param_two|
+      let(:val) { param_one }
+      let(:expected_outcome) { param_two }
+
+      it { is_expected.to eql(expected_outcome) }
+    end
+
     context 'when argument is invalid' do
       context 'when argument is nil' do
-        let(:val) { nil }
-
-        it { is_expected.to be(nil) }
+        include_examples 'transform string into array of integers', nil, nil
       end
 
       context 'when argument is empty string' do
-        let(:val) { '' }
-
-        it { is_expected.to eql([]) }
+        include_examples 'transform string into array of integers', '', []
       end
     end
 
     context 'when argument is valid' do
       context 'when argument is grid' do
-        let(:val) { '3X3' }
-
-        it { is_expected.to eql([3, 3]) }
+        include_examples 'transform string into array of integers', '3X3', [3,3]
       end
 
       context 'when argument is co_ordinates' do
-        let(:val) { '(2,3)' }
-
-        it { is_expected.to eql([2, 3]) }
+        include_examples 'transform string into array of integers', '(2,3)', [2,3]
       end
     end
   end

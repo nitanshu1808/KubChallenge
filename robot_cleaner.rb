@@ -8,8 +8,7 @@ class RobotCleaner
   def initialize(grid, *cordinates)
     @grid = transform_str_into_arr_of_int(grid)
     @cordinates = cordinates
-    @errors = []
-    @instructions = []
+    @errors, @instructions = [], []
   end
 
   def perform
@@ -29,23 +28,22 @@ class RobotCleaner
   end
 
   def process_cordinates
-    current_x = 0
-    current_y = 0
+    current_horizontal_cord, current_vertical_cord = 0, 0
     # Processing co-ordinates
     cordinates.each do |val|
-      x, y = transform_str_into_arr_of_int(val)
-      next unless valid_cordinates?(x, y)
+      horizontal_cord, vertical_cord = transform_str_into_arr_of_int(val)
+      next unless valid_cordinates?(horizontal_cord, vertical_cord)
 
-      x_diff = x - current_x
-      y_diff = y - current_y
-      # Move horizontally
-      instructions.push(moving_val(x_diff)) if x_diff != 0
-      # Move vertically
-      instructions.push(moving_val(y_diff, vertical: true)) if y_diff != 0
-      # Clean the square-meter
-      instructions << 'C' if y_diff != 0 && x_diff != 0
+      horizontal_cord_diff = horizontal_cord - current_horizontal_cord
+      vertical_cord_diff = vertical_cord - current_vertical_cord
 
-      current_x, current_y = x, y
+      instructions.push(*[
+        generate_movement_instructions(horizontal_cord_diff), # Move horizontally
+        generate_movement_instructions(vertical_cord_diff, vertical: true), # Move vertically
+        'C' # Clean the square-meter
+      ].compact)
+
+      current_horizontal_cord, current_vertical_cord = horizontal_cord, vertical_cord
     end
   end
 
@@ -62,7 +60,9 @@ class RobotCleaner
       vertical_cord >= 0 && vertical_cord < height
   end
 
-  def moving_val(value, vertical: false)
+  def generate_movement_instructions(value, vertical: false)
+    return if value == 0
+
     same_direction, opposite_direction = direction_values(vertical)
 
     if value.positive?
