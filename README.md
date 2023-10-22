@@ -23,7 +23,13 @@ Consider the algorithmic solution for the problem:
 ## RSpec Specs
 
 ### Consider the Rspec Tests implemented
-<img width="919" alt="specs" src="https://github.com/nitanshu1808/KubChallenge/assets/15921580/f7e95557-9ca6-47b9-bffe-e5302b6a6da8">
+* [RobotCleaner](https://github.com/nitanshu1808/KubChallenge/blob/main/specs/robot_cleaner_spec.rb)
+
+  <img width="824" alt="Screenshot 2023-10-22 at 22 47 02" src="https://github.com/nitanshu1808/KubChallenge/assets/15921580/359bbb9a-fcdc-40f8-8697-37d989ab5c8e">
+
+* [UtilityHelper](https://github.com/nitanshu1808/KubChallenge/blob/main/specs/utility_helper_spec.rb)
+
+  <img width="921" alt="Screenshot 2023-10-22 at 22 47 44" src="https://github.com/nitanshu1808/KubChallenge/assets/15921580/8aa22f14-a0a9-4a97-b35f-c53471f3ee8a">
 
 ## Declaration
 I acknowledge that the work, I have submitted for assessment is all my own work.
